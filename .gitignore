@@ -1,2 +1,3 @@
 ConfigMap/mu.yml
 Secret/tls.yml
+kubeconfig.yml
