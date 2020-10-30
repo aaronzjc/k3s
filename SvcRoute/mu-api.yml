@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mu-api-svc
+  namespace: k3s-apps
+spec:
+  selector:
+    app: mu-api
+  ports:
+  - port: 80
+    targetPort: 7980
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: mu-api-route-http
+  namespace: traefik
+spec:
+  entryPoints:
+  - web
+  routes:
+  - match: Host(`mu.memosa.cn`)
+    kind: Rule
+    middlewares:
+    - name: redirect-https-mw
+    services:
+    - kind: Service
+      name: mu-api-svc
+      namespace: k3s-apps
+      port: 80
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: mu-api-route-https
+  namespace: traefik
+spec:
+  entryPoints:
+  - websecure
+  routes:
+  - match: Host(`mu.memosa.cn`)
+    kind: Rule
+    services:
+    - name: mu-api-svc
+      namespace: k3s-apps
+      port: 80
+    tls:
+      secretName: tls-memosa-cn
