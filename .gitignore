@@ -1,3 +1,4 @@
 ConfigMap/mu.yml
 Secret/tls.yml
 kubeconfig.yml
+SvcRoute/vpn.yml
