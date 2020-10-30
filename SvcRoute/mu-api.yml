@@ -44,5 +44,5 @@ spec:
     - name: mu-api-svc
       namespace: k3s-apps
       port: 80
-    tls:
-      secretName: tls-memosa-cn
+  tls:
+    secretName: tls-memosa-cn
