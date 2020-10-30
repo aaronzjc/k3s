@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mu-commander
+  namespace: k3s-apps
+spec:
+  selector:
+    matchLabels:
+      app: mu-commander
+  replicas: 2
+  revisionHistoryLimit: 1
+  template:
+    metadata:
+      labels:
+        app: mu-commander
+    spec:
+      volumes:
+      - name: mu-conf
+        configMap:
+          name: mu-config
+      - name: tz-config
+        hostPath:
+          path: /usr/share/zoneinfo/Asia/Shanghai
+      - name: fluent-bit-conf
+        configMap:
+          name: fluent-bit-config
+          items:
+          - key: parser
+            path: parser.conf
+          - key: labelMap
+            path: labelMap.json
+          - key: fluent-bit-commander
+            path: fluent-bit.conf
+      - name: mu-log-dir
+        emptyDir: {}
+      containers:
+      - name: mu-commander
+        image: aaronzjc/mu-commander:latest
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: mu-conf
+          mountPath: /app/conf
+        - name: mu-log-dir
+          mountPath: /var/log
+        ports:
+        - containerPort: 7970
+        resources:
+          limits:
+            cpu: 100m
+            memory: 50Mi
+      - name: fluent-bit
+        image: grafana/fluent-bit-plugin-loki:latest
+        volumeMounts:
+        - name: tz-config
+          mountPath: /etc/localtime
+        - name: mu-log-dir
+          mountPath: /var/log
+        - name: fluent-bit-conf
+          mountPath: /fluent-bit/etc

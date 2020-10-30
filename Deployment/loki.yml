@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loki
+  namespace: log-stack
+spec:
+  selector:
+    matchLabels:
+      app: loki
+  replicas: 1
+  revisionHistoryLimit: 1
+  template:
+    metadata:
+      labels:
+        app: loki
+    spec:
+      volumes:
+      - name: loki-config
+        configMap:
+          name: loki-config
+      - name: loki-data
+        persistentVolumeClaim:
+          claimName: loki-pvc
+      - name: tz-config
+        hostPath:
+          path: /usr/share/zoneinfo/Asia/Shanghai
+      containers:
+      - name: loki
+        image: grafana/loki:latest
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: loki-config
+          mountPath: /etc/loki
+        - name: loki-data
+          mountPath: "/loki"
+        - name: tz-config
+          mountPath: /etc/localtime
+        ports:
+        - containerPort: 3100
