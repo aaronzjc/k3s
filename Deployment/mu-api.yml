@@ -21,9 +21,9 @@ spec:
       - name: mu-conf
         configMap:
           name: mu-config
-      - name: fluent-bit-conf
+      - name: fluent-bit-mu-conf
         configMap:
-          name: fluent-bit-config
+          name: fluent-bit-mu-config
           items:
           - key: parser
             path: parser.conf
@@ -55,5 +55,5 @@ spec:
           mountPath: /etc/localtime
         - name: mu-log-dir
           mountPath: /var/log
-        - name: fluent-bit-conf
+        - name: fluent-bit-mu-conf
           mountPath: /fluent-bit/etc

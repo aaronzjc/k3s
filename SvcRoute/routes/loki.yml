@@ -1,0 +1,15 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: loki-route-http
+  namespace: traefik
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`loki.ops.memosa.cn`)
+    kind: Rule
+    services:
+    - name: loki-svc
+      namespace: log-stack
+      port: 80

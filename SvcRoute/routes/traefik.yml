@@ -1,0 +1,35 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-route-http
+  namespace: traefik
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`traefik.ops.memosa.cn`)
+    kind: Rule
+    middlewares:
+    - name: redirect-https-mw
+    services:
+    - name: traefik-svc
+      namespace: traefik
+      port: 80
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-route-https
+  namespace: traefik
+spec:
+  entryPoints:
+  - websecure
+  routes:
+  - match: Host(`traefik.ops.memosa.cn`)
+    kind: Rule
+    services:
+    - name: traefik-svc
+      namespace: traefik
+      port: 8080
+  tls:
+    secretName: tls-ops-memosa-cn
