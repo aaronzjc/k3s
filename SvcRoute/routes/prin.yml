@@ -1,0 +1,36 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: prin-route-http
+  namespace: traefik
+spec:
+  entryPoints:
+  - web
+  routes:
+  - match: Host(`prin.memosa.cn`)
+    kind: Rule
+    middlewares:
+    - name: redirect-https-mw
+    services:
+    - kind: Service
+      name: prin-svc
+      namespace: k3s-apps
+      port: 80
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: prin-route-https
+  namespace: traefik
+spec:
+  entryPoints:
+  - websecure
+  routes:
+  - match: Host(`prin.memosa.cn`)
+    kind: Rule
+    services:
+    - name: prin-svc
+      namespace: k3s-apps
+      port: 80
+  tls:
+    secretName: tls-memosa-cn
