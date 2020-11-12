@@ -35,5 +35,6 @@ data:
       Buffer true
       DqueSegmentSize 8096
       DqueDir /tmp/flb-storage/buffer
+      Labels {app="traefik"}
       LabelMapPath /fluent-bit/etc/labelMap.json
       DqueName loki.0

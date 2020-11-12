@@ -31,6 +31,7 @@ data:
       Buffer true
       DqueSegmentSize 8096
       DqueDir /tmp/flb-storage/buffer
+      Labels {app="mu-api"}
       LabelMapPath /fluent-bit/etc/labelMap.json
       DqueName loki.0
   fluent-bit-commander: |
@@ -51,5 +52,6 @@ data:
       Buffer true
       DqueSegmentSize 8096
       DqueDir /tmp/flb-storage/buffer
+      Labels {app="mu-commander"}
       LabelMapPath /fluent-bit/etc/labelMap.json
       DqueName loki.0
