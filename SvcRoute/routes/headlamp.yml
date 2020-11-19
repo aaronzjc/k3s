@@ -1,38 +1,36 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: prin-route-http
+  name: headlamp-route-http
   namespace: traefik
 spec:
   entryPoints:
-  - web
+    - web
   routes:
-  - match: Host(`tools.memosa.cn`)
+  - match: Host(`kube.memosa.cn`)
     kind: Rule
     middlewares:
     - name: redirect-https-mw
     services:
-    - kind: Service
-      name: prin-svc
-      namespace: k3s-apps
+    - name: headlamp-svc
+      namespace: kube-system
       port: 80
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: prin-route-https
+  name: headlamp-route-https
   namespace: traefik
 spec:
   entryPoints:
-  - websecure
+    - websecure
   routes:
-  - match: Host(`tools.memosa.cn`)
+  - match: Host(`kube.memosa.cn`)
     kind: Rule
-    middlewares:
-    - name: compress-mw
     services:
-    - name: prin-svc
-      namespace: k3s-apps
+    - kind: Service
+      name: headlamp-svc
+      namespace: kube-system
       port: 80
   tls:
     secretName: tls-memosa-cn

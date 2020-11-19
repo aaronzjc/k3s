@@ -28,6 +28,8 @@ spec:
   routes:
   - match: Host(`mu.memosa.cn`)
     kind: Rule
+    middlewares:
+    - name: compress-mw
     services:
     - name: mu-api-svc
       namespace: k3s-apps

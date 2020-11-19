@@ -1,0 +1,45 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: headlamp
+  namespace: kube-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: headlamp
+  template:
+    metadata:
+      labels:
+        app: headlamp
+    spec:
+      containers:
+      - name: headlamp
+        image: quay.io/kinvolk/headlamp:latest
+        args:
+          - "-in-cluster"
+          - "-plugins-dir=/headlamp/plugins"
+        ports:
+        - containerPort: 4466
+        livenessProbe:
+          httpGet:
+            scheme: HTTP
+            path: /
+            port: 4466
+          initialDelaySeconds: 30
+          timeoutSeconds: 30
+      nodeSelector:
+        'beta.kubernetes.io/os': linux
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: headlamp-svc
+  namespace: kube-system
+spec:
+  ports:
+    - port: 80
+      targetPort: 4466
+  selector:
+    app: headlamp
