@@ -35,4 +35,7 @@ spec:
       namespace: k3s-apps
       port: 80
   tls:
-    secretName: tls-memosa-cn
+    options:
+      name: tlsoption-memosa-cn
+    store:
+      name: tlsstore-memosa-cn

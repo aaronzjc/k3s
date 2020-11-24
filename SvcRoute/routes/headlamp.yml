@@ -33,4 +33,5 @@ spec:
       namespace: kube-system
       port: 80
   tls:
-    secretName: tls-memosa-cn
+    store:
+      name: tlsstore-memosa-cn

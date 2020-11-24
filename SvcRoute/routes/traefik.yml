@@ -32,4 +32,5 @@ spec:
       namespace: traefik
       port: 8080
   tls:
-    secretName: tls-ops-memosa-cn
+    store:
+      name: tlsstore-ops-memosa-cn
