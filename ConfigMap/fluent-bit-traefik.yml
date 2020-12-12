@@ -29,7 +29,7 @@ data:
       Parser        mjson
       Tag           traefik
     [Output]
-      Name loki
+      Name grafana-loki
       Match *
       Url http://loki.ops.memosa.cn/loki/api/v1/push
       Buffer true
