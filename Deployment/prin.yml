@@ -32,10 +32,6 @@ spec:
           mountPath: /var/log
         ports:
         - containerPort: 8980
-        resources:
-            limits:
-              cpu: 200m
-              memory: 200Mi
       - name: fluent-bit
         image: grafana/fluent-bit-plugin-loki:latest
         volumeMounts:
