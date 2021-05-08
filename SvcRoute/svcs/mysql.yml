@@ -15,6 +15,6 @@ metadata:
   namespace: k3s-apps
 subsets:
   - addresses:
-      - ip: 10.8.77.119
+      - ip: 10.7.41.242
     ports:
       - port: 7306
