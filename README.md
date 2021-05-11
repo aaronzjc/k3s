@@ -5,7 +5,7 @@
 ### 安装
 
 ```shell
-$ curl -sfL https://get.k3s.io | sh -s - --disable=traefik
+$ curl -sfL https://get.k3s.io | INSTALL_K3S_CHANNEL=latest sh -
 ```
 
 ### 部署
