@@ -36,5 +36,3 @@ spec:
     secretName: tls-memosa-cn
     options:
       name: tlsoption-memosa-cn
-    # store:
-    #   name: tlsstore-memosa-cn
