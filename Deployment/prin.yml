@@ -32,12 +32,12 @@ spec:
           mountPath: /var/log
         ports:
         - containerPort: 8980
-      - name: fluent-bit
-        image: grafana/fluent-bit-plugin-loki:latest
-        volumeMounts:
-        - name: tz-config
-          mountPath: /etc/localtime
-        - name: prin-log-dir
-          mountPath: /var/log
-        - name: fluent-bit-prin-conf
-          mountPath: /fluent-bit/etc
+      # - name: fluent-bit
+      #   image: grafana/fluent-bit-plugin-loki:latest
+      #   volumeMounts:
+      #   - name: tz-config
+      #     mountPath: /etc/localtime
+      #   - name: prin-log-dir
+      #     mountPath: /var/log
+      #   - name: fluent-bit-prin-conf
+      #     mountPath: /fluent-bit/etc

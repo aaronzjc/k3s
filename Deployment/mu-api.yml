@@ -48,12 +48,12 @@ spec:
           limits:
             cpu: 50m
             memory: 50Mi
-      - name: fluent-bit
-        image: grafana/fluent-bit-plugin-loki:latest
-        volumeMounts:
-        - name: tz-config
-          mountPath: /etc/localtime
-        - name: mu-log-dir
-          mountPath: /var/log
-        - name: fluent-bit-mu-conf
-          mountPath: /fluent-bit/etc
+      # - name: fluent-bit
+      #   image: grafana/fluent-bit-plugin-loki:latest
+      #   volumeMounts:
+      #   - name: tz-config
+      #     mountPath: /etc/localtime
+      #   - name: mu-log-dir
+      #     mountPath: /var/log
+      #   - name: fluent-bit-mu-conf
+      #     mountPath: /fluent-bit/etc
