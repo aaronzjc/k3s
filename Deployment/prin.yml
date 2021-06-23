@@ -13,6 +13,8 @@ spec:
     metadata:
       labels:
         app: prin
+      annotations:
+        commit_sha: CI_COMMIT_SHA
     spec:
       volumes:
       - name: tz-config
@@ -32,12 +34,7 @@ spec:
           mountPath: /var/log
         ports:
         - containerPort: 8980
-      # - name: fluent-bit
-      #   image: grafana/fluent-bit-plugin-loki:latest
-      #   volumeMounts:
-      #   - name: tz-config
-      #     mountPath: /etc/localtime
-      #   - name: prin-log-dir
-      #     mountPath: /var/log
-      #   - name: fluent-bit-prin-conf
-      #     mountPath: /fluent-bit/etc
+        resources:
+          limits:
+            cpu: 50m
+            memory: 50Mi
