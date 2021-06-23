@@ -14,7 +14,7 @@ spec:
       labels:
         app: prin
       annotations:
-        commit_sha: CI_COMMIT_SHA
+        commit_sha: ${GITHUB_SHA}
     spec:
       volumes:
       - name: tz-config
