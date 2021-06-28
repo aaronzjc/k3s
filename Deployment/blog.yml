@@ -14,25 +14,9 @@ spec:
       labels:
         app: blog
     spec:
-      volumes:
-      - name: site-dir
-        emptyDir: {}
       containers:
-      - name: blog
+      - name: site
         image: aaronzjc/blog:latest
-        imagePullPolicy: Always
-        volumeMounts:
-        - name: site-dir
-          mountPath: /usr/share/nginx/html
-        resources:
-          limits:
-            cpu: 50m
-            memory: 50Mi
-      - name: nginx
-        image: nginx
-        volumeMounts:
-        - name: site-dir
-          mountPath: /usr/share/nginx/html
         ports:
         - containerPort: 80
         resources:
