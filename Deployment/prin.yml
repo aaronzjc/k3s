@@ -13,8 +13,6 @@ spec:
     metadata:
       labels:
         app: prin
-      annotations:
-        commit_sha: ${GITHUB_SHA}
     spec:
       volumes:
       - name: tz-config
@@ -27,7 +25,7 @@ spec:
         emptyDir: {}
       containers:
       - name: prin
-        image: aaronzjc/prin:CI_SHA
+        image: aaronzjc/prin:latest
         imagePullPolicy: Always
         volumeMounts:
         - name: prin-log-dir
