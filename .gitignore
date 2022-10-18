@@ -1,5 +1,3 @@
-ConfigMap/mu.yml
-*-tls.yml
 kubeconfig.yml
 vpn.yml
 .DS_Store
