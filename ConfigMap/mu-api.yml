@@ -1,0 +1,55 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mu-config
+  namespace: k3s-apps
+data:
+  app.json: |
+    {
+        "app_name": "mu",
+
+        "server": {
+            "https": true,
+            "host": "mu.memosa.cn",
+            "port": ":7980",
+            "static": true
+        },
+
+        "frontend": {
+            "index": "",
+            "admin": ""
+        },
+
+        "commander": {
+            "addr": "mu-commander-svc:80"
+        },
+
+        "redis": {
+            "host": "redis-svc",
+            "port": 7379,
+            "password": "xxxxxx"
+        },
+
+        "db": {
+            "host": "mysql-svc",
+            "port": xxxx,
+            "user": "xxxx",
+            "password": "xxxx",
+            "database": "xxxx"
+        },
+
+        "auth": {
+            "github": {
+                "client_id": "xxxxxx",
+                "client_secret": "xxxxx",
+                "admins": ["aaronzjc"]
+            },
+            "weibo": {
+                "client_id": "xxxx",
+                "client_secret": "xxxxxxx",
+                "admins": ["2505245962"]
+            }
+        },
+
+        "salt": "xxxxx"
+    }

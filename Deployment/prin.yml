@@ -18,9 +18,6 @@ spec:
       - name: tz-config
         hostPath:
           path: /usr/share/zoneinfo/Asia/Shanghai
-      - name: fluent-bit-prin-conf
-        configMap:
-          name: fluent-bit-prin-config
       - name: prin-log-dir
         emptyDir: {}
       containers:

@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingrss-mu-api
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    traefik.ingress.kubernetes.io/router.tls: true
+spec:
+  rules:
+    - host: mu.memosa.cn
+      http:
+        paths:
+          - path: /
+            pathType: Exact
+            backend:
+              service:
+                name: mu-api-svc
+                port:
+                  number: 80
+tls:
+- secretName: tls-memosa-cn

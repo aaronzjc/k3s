@@ -1,8 +1,0 @@
-apiVersion: traefik.containo.us/v1alpha1
-kind: TLSStore
-metadata:
-  name: tlsstore-memosa-cn
-  namespace: traefik
-spec:
-  defaultCertificate:
-    secretName: tls-memosa-cn

@@ -21,16 +21,6 @@ spec:
       - name: tz-config
         hostPath:
           path: /usr/share/zoneinfo/Asia/Shanghai
-      - name: fluent-bit-mu-conf
-        configMap:
-          name: fluent-bit-mu-config
-          items:
-          - key: parser
-            path: parser.conf
-          - key: labelMap
-            path: labelMap.json
-          - key: fluent-bit-commander
-            path: fluent-bit.conf
       - name: mu-log-dir
         emptyDir: {}
       containers:
@@ -48,12 +38,3 @@ spec:
           limits:
             cpu: 50m
             memory: 50Mi
-      # - name: fluent-bit
-      #   image: grafana/fluent-bit-plugin-loki:latest
-      #   volumeMounts:
-      #   - name: tz-config
-      #     mountPath: /etc/localtime
-      #   - name: mu-log-dir
-      #     mountPath: /var/log
-      #   - name: fluent-bit-mu-conf
-      #     mountPath: /fluent-bit/etc
