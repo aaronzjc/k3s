@@ -17,8 +17,9 @@ $ curl -sfL https://get.k3s.io | INSTALL_K3S_CHANNEL=v1.19.5+k3s2 sh -s - --disa
 ```shell
 # 1. 创建命名空间
 kubectl apply -f Namespace/
-# 2. 创建配置文件
+# 2. 创建配置文件和密钥
 kubectl apply -f ConfigMap/
+kubectl apply -f Secret/
 # 3. 部署Pods
 kubectl apply -f Deployment/
 # 4. 部署Services
