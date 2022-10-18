@@ -28,4 +28,6 @@ kubectl apply -f SvcRoute/svcs/
 kubectl apply -f SvcRoute/mw/
 # 6. 部署ingress
 kubectl apply -f SvcRoute/ingress/
+# 7. 手动更新证书的脚本
+sh Script/renewal.sh
 ```
