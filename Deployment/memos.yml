@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: memos
+  namespace: k3s-apps
+spec:
+  selector:
+    matchLabels:
+      app: memos
+  replicas: 1
+  revisionHistoryLimit: 1
+  template:
+    metadata:
+      labels:
+        app: memos
+    spec:
+      volumes:
+      - name: memos-data
+        hostPath:
+          path: /data/memos
+          type: Directory
+      containers:
+      - name: memos
+        image: neosmemo/memos:latest
+        ports:
+        - containerPort: 5230
+        volumeMounts:
+        - mountPath: /var/opt/memos
+          name: memos-data
+        resources:
+          limits:
+            cpu: 50m
+            memory: 50Mi
