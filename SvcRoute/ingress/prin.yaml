@@ -1,21 +1,46 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ingrss-prin
+  name: ingress-prin-tls
+  namespace: k3s-apps
   annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
-    traefik.ingress.kubernetes.io/router.tls: true
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.middlewares: k3s-apps-compress-mw@kubernetescrd
 spec:
   rules:
     - host: tools.memosa.cn
       http:
         paths:
           - path: /
-            pathType: Exact
+            pathType: Prefix
             backend:
               service:
                 name: prin-svc
                 port:
                   number: 80
-tls:
-- secretName: tls-memosa-cn
+  tls:
+  - secretName: tls-memosa-cn
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-prin
+  namespace: k3s-apps
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+    traefik.ingress.kubernetes.io/router.middlewares: k3s-apps-redirect-https-mw@kubernetescrd
+spec:
+  rules:
+    - host: tools.memosa.cn
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: prin-svc
+                port:
+                  number: 80
